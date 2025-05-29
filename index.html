@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <title>Negociação nos debates</title>
+  <style>
+    body {
+      font-family: 'Pacifico', cursive;
+      background-image: linear-gradient(45deg,#C7B8EA, #ADD8E6,#C0C0C0);
+      background-size: 100% 100%;
+      background-attachment: fixed;
+      padding: 20px;
+      font-size: 1.2em; /* Increased base font size for better readability */
+    }
+    mark {
+      background-color: #FFC107;
+      padding: 2px 4px;
+      border-radius: 10px;
+    }
+    .hidden {
+      display: none;
+    }
+    .section {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+    button {
+      background: #FFC107;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .quiz-question {
+      margin-bottom: 15px;
+    }
+    .quiz-question ul {
+      list-style: none;
+      padding: 0;
+    }
+    .quiz-question li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    <center>
+      °•°•artigo•°•°<br>
+      ~de~<br>
+      •°•°opinião°•°•
+    </center>
+  </h1>
+
+  <h3>---> <mark>Negociação nos debates e esquema de participação</mark></h3>
+
+  <div>
+    <button onclick="mostrarConteudo()">Ver Conteúdo</button>
+    <button onclick="mostrarQuiz()">Fazer Quiz</button>
+  </div>
+
+  <div id="conteudo" class="section">
+    <h2>📘 Conteúdo Detalhado: Negociação e Participação em Debates</h2>
+    <p>
+      A arte da negociação em debates transcende a mera disputa de ideias; ela é uma **habilidade fundamental** para
+      a construção de diálogos produtivos e a resolução de conflitos. No cerne de uma negociação eficaz reside a
+      **escuta ativa**, que implica em ouvir atentamente não apenas as palavras, mas também as intenções e as emoções
+      por trás delas. Complementar à escuta ativa, a **empatia** permite que os debatedores se coloquem no lugar do
+      outro, compreendendo suas perspectivas e motivações, mesmo que divergentes das suas.
+    </p>
+    <p>
+      Além disso, a capacidade de **argumentar de forma lógica e respeitosa** é crucial. Isso significa apresentar
+      seus pontos de vista com clareza, embasamento e sem recorrer a ataques pessoais ou falácias. O objetivo não é
+      "ganhar" a todo custo, mas sim **colaborar para que ideias diferentes encontrem um ponto em comum**, promovendo
+      consensos e, idealmente, soluções criativas e inovadoras para os desafios em pauta.
+    </p>
+    <p>
+      ---
+    </p>
+    <h3>O Esquema de Participação: A Espinha Dorsal do Debate</h3>
+    <p>
+      Enquanto a negociação dita a qualidade da interação, o **esquema de participação** estrutura o fluxo do debate,
+      garantindo ordem e equidade. A ausência de um esquema claro pode levar a um ambiente caótico, com interrupções
+      constantes, sobreposições de falas e, consequentemente, à improdutividade.
+    </p>
+    <p>
+      Existem diversas formas de definir o esquema de participação, cada uma com suas vantagens e desvantagens,
+      dependendo do contexto e dos objetivos do debate:
+    </p>
+    <ul>
+      <li>
+        <strong>Por Ordem Predefinida:</strong> Os participantes se manifestam em uma sequência estabelecida,
+        o que garante que todos terão seu espaço. É ideal para debates formais ou quando o tempo é limitado.
+      </li>
+      <li>
+        <strong>Por Inscrição:</strong> Os interessados em falar se inscrevem previamente, e o moderador chama
+        cada um na ordem de inscrição. Permite mais flexibilidade do que a ordem predefinida, mas ainda mantém
+        o controle.
+      </li>
+      <li>
+        <strong>Livremente (com moderação):</strong> Os participantes podem intervir quando acharem oportuno,
+        porém, um moderador é essencial para evitar o caos, distribuir a palavra e garantir que ninguém domine
+        a discussão.
+      </li>
+      <li>
+        <strong>Rodadas Fixas:</strong> Cada participante tem um tempo determinado para falar em rodadas sucessivas,
+        permitindo que todos respondam e contra-argumentem de forma equitativa.
+      </li>
+    </ul>
+    <p>
+      **A definição do esquema de participação deve ser previamente combinada e aceita por todos os envolvidos.**
+      Isso evita mal-entendidos, frustrações e contribui para um ambiente de respeito mútuo. Um bom esquema não
+      apenas garante a igualdade de fala, mas também otimiza a fluidez e a produtividade do debate, permitindo
+      que as ideias sejam apresentadas, discutidas e compreendidas de forma eficaz.
+    </p>
+    <p>
+      Em suma, a combinação de habilidades de negociação afiadas com um esquema de participação bem estruturado
+      é a receita para debates que não apenas informam, mas também transformam e constroem soluções conjuntas.
+    </p>
+  </div>
+
+  <div id="quiz" class="section hidden">
+    <h2>📝 Quiz</h2>
+    <div id="quiz-questions"></div>
+    <button onclick="verificarQuiz()">Verificar Respostas</button>
+    <p id="resultadoQuiz" style="font-weight: bold;"></p>
+  </div>
+
+  <script>
+    const allQuestions = [
+      {
+        question: "1. Qual é um elemento crucial da escuta ativa em debates?",
+        options: [
+          { text: "Interromper para dar sua opinião", correct: false },
+          { text: "Ouvir apenas o que você concorda", correct: false },
+          { text: "Compreender as intenções e emoções por trás das palavras", correct: true }
+        ]
+      },
+      {
+        question: "2. O que a empatia permite em uma negociação de debate?",
+        options: [
+          { text: "Dominar a discussão", correct: false },
+          { text: "Compreender as perspectivas e motivações do outro", correct: true },
+          { text: "Fazer o outro mudar de ideia rapidamente", correct: false }
+        ]
+      },
+      {
+        question: "3. Por que é importante argumentar de forma respeitosa?",
+        options: [
+          { text: "Para evitar que o debate termine", correct: false },
+          { text: "Para que as ideias sejam apresentadas com clareza e sem ataques pessoais", correct: true },
+          { text: "Para mostrar que você é o mais inteligente", correct: false }
+        ]
+      },
+      {
+        question: "4. Qual o principal objetivo de saber negociar em debates?",
+        options: [
+          { text: "Sempre 'ganhar' a discussão", correct: false },
+          { text: "Colaborar para encontrar pontos em comum e soluções criativas", correct: true },
+          { text: "Desqualificar a opinião alheia", correct: false }
+        ]
+      },
+      {
+        question: "5. O que acontece se não houver um esquema de participação definido?",
+        options: [
+          { text: "O debate fica mais dinâmico", correct: false },
+          { text: "Pode haver interrupções e sobreposições de falas, levando ao caos", correct: true },
+          { text: "Todos terão mais liberdade para falar", correct: false }
+        ]
+      },
+      {
+        question: "6. Qual tipo de esquema de participação garante que todos terão seu espaço em uma sequência?",
+        options: [
+          { text: "Livremente (com moderação)", correct: false },
+          { text: "Por Ordem Predefinida", correct: true },
+          { text: "Por Inscrição", correct: false }
+        ]
+      },
+      {
+        question: "7. Em qual esquema de participação um moderador é essencial para evitar o caos?",
+        options: [
+          { text: "Rodadas Fixas", correct: false },
+          { text: "Por Ordem Predefinida", correct: false },
+          { text: "Livremente (com moderação)", correct: true }
+        ]
+      },
+      {
+        question: "8. Por que a definição do esquema de participação deve ser combinada previamente?",
+        options: [
+          { text: "Para surpreender os participantes", correct: false },
+          { text: "Para evitar mal-entendidos e frustrações", correct: true },
+          { text: "Para que o moderador tenha mais trabalho", correct: false }
+        ]
+      },
+      {
+        question: "9. O que um bom esquema de participação otimiza no debate?",
+        options: [
+          { text: "A quantidade de conflitos", correct: false },
+          { text: "A fluidez e a produtividade", correct: true },
+          { text: "A duração do debate sem conclusão", correct: false }
+        ]
+      },
+      {
+        question: "10. Além da escuta ativa e empatia, o que é crucial para uma boa negociação?",
+        options: [
+          { text: "Fazer piadas constantes", correct: false },
+          { text: "Argumentar de forma lógica e respeitosa", correct: true },
+          { text: "Impor sua vontade aos outros", correct: false }
+        ]
+      },
+      {
+        question: "11. Qual é um dos resultados desejados da negociação em debates?",
+        options: [
+          { text: "Aumento das divergências", correct: false },
+          { text: "Promover consensos e soluções criativas", correct: true },
+          { text: "Apenas a apresentação de diferentes pontos de vista", correct: false }
+        ]
+      },
+      {
+        question: "12. O que significa 'colaborar para que ideias diferentes encontrem um ponto em comum'?",
+        options: [
+          { text: "Forçar os outros a aceitarem sua ideia", correct: false },
+          { text: "Trabalhar junto para achar um acordo ou uma nova solução", correct: true },
+          { text: "Ignorar as ideias dos outros e manter a sua", correct: false }
+        ]
+      },
+      {
+        question: "13. Em um debate, o que evita interrupções e sobreposições de falas?",
+        options: [
+          { text: "Falar mais alto", correct: false },
+          { text: "Um esquema de participação bem definido", correct: true },
+          { text: "Ignorar as regras", correct: false }
+        ]
+      },
+      {
+        question: "14. Qual a finalidade de um esquema de participação 'Por Inscrição'?",
+        options: [
+          { text: "Permitir que apenas algumas pessoas falem", correct: false },
+          { text: "Manter o controle e flexibilidade, chamando na ordem de inscrição", correct: true },
+          { text: "Causar confusão sobre quem deve falar", correct: false }
+        ]
+      },
+      {
+        question: "15. O que caracteriza o esquema de participação 'Rodadas Fixas'?",
+        options: [
+          { text: "Não há limite de tempo para ninguém", correct: false },
+          { text: "Cada participante tem um tempo determinado para falar em rodadas sucessivas", correct: true },
+          { text: "Apenas um participante fala o tempo todo", correct: false }
+        ]
+      },
+      {
+        question: "16. Como a escuta ativa contribui para a negociação em debates?",
+        options: [
+          { text: "Permitindo que se ignore o que o outro diz", correct: false },
+          { text: "Ajudando a entender as intenções e emoções por trás das palavras", correct: true },
+          { text: "Focando apenas em sua própria resposta", correct: false }
+        ]
+      },
+      {
+        question: "17. A empatia é importante para:",
+        options: [
+          { text: "Manipular as pessoas", correct: false },
+          { text: "Compreender as perspectivas e motivações dos outros debatedores", correct: true },
+          { text: "Ganhar a discussão a qualquer custo", correct: false }
+        ]
+      },
+      {
+        question: "18. O que é fundamental para um argumento ser respeitoso?",
+        options: [
+          { text: "Ser agressivo", correct: false },
+          { text: "Apresentar pontos de vista com clareza e sem ataques pessoais", correct: true },
+          { text: "Usar sarcasmo", correct: false }
+        ]
+      },
+      {
+        question: "19. Qual o papel do moderador em um esquema de participação 'Livremente'?",
+        options: [
+          { text: "Fazer o debate parar", correct: false },
+          { text: "Garantir a ordem, distribuir a palavra e evitar que alguém domine", correct: true },
+          { text: "Participar ativamente da discussão como debatedor", correct: false }
+        ]
+      },
+      {
+        question: "20. A combinação de habilidades de negociação e um esquema de participação estruturado leva a:",
+        options: [
+          { text: "Mais confusão e desordem", correct: false },
+          { text: "Debates que informam, transformam e constroem soluções conjuntas", correct: true },
+          { text: "Discussões sem fim e sem propósito", correct: false }
+        ]
+      },
+      {
+        question: "21. Qual aspecto da negociação envolve ouvir e processar o que está sendo dito?",
+        options: [
+          { text: "Contra-argumentação imediata", correct: false },
+          { text: "Escuta ativa", correct: true },
+          { text: "Imposição de ideias", correct: false }
+        ]
+      },
+      {
+        question: "22. Para que serve a capacidade de argumentar de forma lógica?",
+        options: [
+          { text: "Para confundir o adversário", correct: false },
+          { text: "Para apresentar seus pontos de vista com clareza e embasamento", correct: true },
+          { text: "Para alongar o debate", correct: false }
+        ]
+      },
+      {
+        question: "23. O que promove consensos e soluções criativas em um debate?",
+        options: [
+          { text: "O confronto direto e sem negociação", correct: false },
+          { text: "A colaboração para encontrar pontos em comum", correct: true },
+          { text: "Ignorar as diferenças de opinião", correct: false }
+        ]
+      },
+      {
+        question: "24. O que significa 'sobreposições de falas' em um debate?",
+        options: [
+          { text: "Falar em turnos organizados", correct: false },
+          { text: "Várias pessoas falando ao mesmo tempo", correct: true },
+          { text: "Falar sobre o mesmo tema repetidamente", correct: false }
+        ]
+      },
+      {
+        question: "25. Qual é uma vantagem do esquema de participação 'Por Ordem Predefinida'?",
+        options: [
+          { text: "Total liberdade para interrupções", correct: false },
+          { text: "Garante que todos terão seu espaço em uma sequência estabelecida", correct: true },
+          { text: "Permite que apenas os mais rápidos falem", correct: false }
+        ]
+      },
+      {
+        question: "26. O que acontece se o esquema de participação não é aceito por todos?",
+        options: [
+          { text: "O debate se torna mais interessante", correct: false },
+          { text: "Pode gerar mal-entendidos e frustrações", correct: true },
+          { text: "A discussão se torna mais rápida", correct: false }
+        ]
+      },
+      {
+        question: "27. Qual é um dos objetivos de otimizar a fluidez do debate?",
+        options: [
+          { text: "Tornar o debate mais confuso", correct: false },
+          { text: "Permitir que as ideias sejam apresentadas, discutidas e compreendidas eficazmente", correct: true },
+          { text: "Diminuir a participação dos envolvidos", correct: false }
+        ]
+      },
+      {
+        question: "28. Qual a importância de evitar falácias na argumentação?",
+        options: [
+          { text: "Para não prolongar o debate", correct: false },
+          { text: "Para manter a lógica e o respeito na discussão", correct: true },
+          { text: "Para impressionar o público", correct: false }
+        ]
+      },
+      {
+        question: "29. O que significa 'construir soluções conjuntas' em um debate?",
+        options: [
+          { text: "Cada um apresenta sua solução individualmente", correct: false },
+          { text: "Trabalhar em conjunto para criar soluções que todos possam aceitar", correct: true },
+          { text: "Apenas apontar os problemas", correct: false }
+        ]
+      },
+      {
+        question: "30. Qual o benefício de compreender as motivações do outro em um debate?",
+        options: [
+          { text: "Para explorá-las contra ele", correct: false },
+          { text: "Para facilitar a busca por pontos em comum e acordos", correct: true },
+          { text: "Para ignorar o que o outro pensa", correct: false }
+        ]
+      },
+      {
+        question: "31. O que é promovido pela escuta ativa em debates?",
+        options: [
+          { text: "Desinteresse", correct: false },
+          { text: "Compreensão e respeito pelas diferentes vozes", correct: true },
+          { text: "Confusão", correct: false }
+        ]
+      },
+      {
+        question: "32. O que se evita ao combinar previamente o esquema de participação?",
+        options: [
+          { text: "A criatividade dos participantes", correct: false },
+          { text: "Interrupções, sobreposições e desorganização", correct: true },
+          { text: "Debates produtivos", correct: false }
+        ]
+      },
+      {
+        question: "33. Qual é o papel da negociação em um debate, além de 'ganhar uma discussão'?",
+        options: [
+          { text: "Gerar mais conflito", correct: false },
+          { text: "Promover a colaboração e a busca por consensos", correct: true },
+          { text: "Impor a própria visão", correct: false }
+        ]
+      },
+      {
+        question: "34. O que é uma habilidade essencial para garantir que todas as vozes sejam ouvidas e respeitadas?",
+        options: [
+          { text: "Ser o mais barulhento", correct: false },
+          { text: "Negociação", correct: true },
+          { text: "Restringir a fala de alguns", correct: false }
+        ]
+      },
+      {
+        question: "35. A definição do esquema de participação influencia diretamente em quê?",
+        options: [
+          { text: "Na complexidade do vocabulário", correct: false },
+          { text: "Na fluidez e na produtividade do debate", correct: true },
+          { text: "Na duração indefinida do debate", correct: false }
+        ]
+      },
+      {
+        question: "36. O que se busca ao promover consensos em um debate?",
+        options: [
+          { text: "Que todos pensem exatamente igual", correct: false },
+          { text: "Atingir acordos e soluções que satisfaçam a maioria ou todos", correct: true },
+          { text: "Continuar a discussão sem fim", correct: false }
+        ]
+      },
+      {
+        question: "37. Qual a importância de evitar ataques pessoais durante a argumentação?",
+        options: [
+          { text: "Para distrair o público", correct: false },
+          { text: "Para manter o foco nas ideias e no respeito mútuo", correct: true },
+          { text: "Para parecer mais forte na discussão", correct: false }
+        ]
+      },
+      {
+        question: "38. O que um debate produtivo consegue gerar?",
+        options: [
+          { text: "Apenas desentendimentos", correct: false },
+          { text: "Soluções criativas e inovadoras", correct: true },
+          { text: "Mais problemas do que soluções", correct: false }
+        ]
+      },
+      {
+        question: "39. O que significa 'distribuir a palavra' em um debate?",
+        options: [
+          { text: "Fazer com que apenas um fale", correct: false },
+          { text: "Garantir que diferentes pessoas tenham a chance de se manifestar", correct: true },
+          { text: "Passar a palavra para quem não quer falar", correct: false }
+        ]
+      },
+      {
+        question: "40. Por que a transparência sobre o esquema de participação é fundamental?",
+        options: [
+          { text: "Para tornar o debate secreto", correct: false },
+          { text: "Para criar um ambiente de respeito e clareza", correct: true },
+          { text: "Para gerar discussões sobre as regras", correct: false }
+        ]
+      }
+    ];
+
+    let currentQuestions = [];
+    const numberOfQuestions = 10; // You can adjust this number
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    function generateQuiz() {
+      shuffleArray(allQuestions);
+      currentQuestions = allQuestions.slice(0, numberOfQuestions);
+
+      const quizQuestionsDiv = document.getElementById('quiz-questions');
+      quizQuestionsDiv.innerHTML = ''; // Clear previous questions
+
+      currentQuestions.forEach((q, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('quiz-question');
+        questionDiv.innerHTML = `<p><strong>${index + 1}. ${q.question}</strong></p><ul>`;
+        shuffleArray(q.options); // Shuffle options for each question
+
+        q.options.forEach((option, optionIndex) => {
+          questionDiv.innerHTML += `
+            <li>
+              <input type="radio" name="q${index}" value="${option.correct}" id="q${index}option${optionIndex}">
+              <label for="q${index}option${optionIndex}">${option.text}</label>
+            </li>
+          `;
+        });
+        questionDiv.innerHTML += `</ul>`;
+        quizQuestionsDiv.appendChild(questionDiv);
+      });
+    }
+
+    function mostrarConteudo() {
+      document.getElementById('conteudo').classList.remove('hidden');
+      document.getElementById('quiz').classList.add('hidden');
+      document.getElementById('resultadoQuiz').innerText = '';
+    }
+
+    function mostrarQuiz() {
+      generateQuiz(); // Generate new quiz questions every time
+      document.getElementById('conteudo').classList.add('hidden');
+      document.getElementById('quiz').classList.remove('hidden');
+      document.getElementById('resultadoQuiz').innerText = '';
+    }
+
+    function verificarQuiz() {
+      let correctAnswers = 0;
+      let totalQuestions = currentQuestions.length;
+
+      currentQuestions.forEach((q, index) => {
+        const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selectedOption && selectedOption.value === 'true') {
+          correctAnswers++;
+        }
+      });
+
+      if (correctAnswers === totalQuestions) {
+        document.getElementById('resultadoQuiz').innerText = `✅ Parabéns! Você acertou todas as ${totalQuestions} perguntas!`;
+      } else {
+        document.getElementById('resultadoQuiz').innerText = `❌ Tente novamente. Você acertou ${correctAnswers} de ${totalQuestions} perguntas.`;
+      }
+    }
+
+    // Initialize content view on page load
+    document.addEventListener('DOMContentLoaded', mostrarConteudo);
+  </script>
+
+</body>
+</html>
